@@ -85,7 +85,6 @@ public class VornitologistOfflineMode extends VOverlay implements OfflineMode,
         Style style = getElement().getStyle();
         style.setZIndex(30001); // Make sure this is over the indicator
 
-
         final ListBox listBox = new ListBox();
         listBox.setHeight("25px");
         listBox.getElement().getStyle().setMarginTop(10, Unit.PX);
@@ -188,14 +187,15 @@ public class VornitologistOfflineMode extends VOverlay implements OfflineMode,
 
         speciesBox.setWidth("100%");
         p.add(speciesBox);
-        p.updateCaption(speciesBox, "Select species:", null, "100.0%", "v-caption");
+        p.updateCaption(speciesBox, "Select species:", null, "100.0%",
+                "v-caption");
 
         countBox.setWidth("100%");
         p.add(countBox);
-        p.updateCaption(countBox, "Count:", null, "100.0%",  "v-caption");
+        p.updateCaption(countBox, "Count:", null, "100.0%", "v-caption");
 
         panel.add(p);
-        
+
         panel.add(addObservation);
 
         label = new Label("Unsynchronized observations");
@@ -216,7 +216,7 @@ public class VornitologistOfflineMode extends VOverlay implements OfflineMode,
         currentlyStoredLabel.getElement().getStyle().setPaddingTop(10, Unit.PX);
         currentlyStoredLabel.getElement().getStyle()
                 .setPaddingBottom(10, Unit.PX);
-        
+
         setShadowEnabled(false);
         show();
         getElement().getStyle().setWidth(100, Unit.PCT);
@@ -333,16 +333,17 @@ public class VornitologistOfflineMode extends VOverlay implements OfflineMode,
 
     @Override
     public void activate(ActivationReason event) {
-        /*
-         * OfflineDataService has async api that returns available species from
-         * a cached resources.
-         */
-        OfflineDataService.getSpecies(new OfflineDataService.Callback() {
-            public void setSpecies(final List<Species> birds) {
-                buildUi(birds);
-            }
-        });
-        
+        if (event != ActivationReason.APP_STARTING) {
+            /*
+             * OfflineDataService has async api that returns available species
+             * from a cached resources.
+             */
+            OfflineDataService.getSpecies(new OfflineDataService.Callback() {
+                public void setSpecies(final List<Species> birds) {
+                    buildUi(birds);
+                }
+            });
+        }
     }
 
 }
