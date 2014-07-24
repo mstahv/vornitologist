@@ -1,0 +1,31 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<diskStore path="auto/default/path"/>
+  <!-- Page and Page Fragment Caches -->
+<cache name="SimplePageCachingFilter"
+  maxEntriesLocalHeap="10"
+  eternal="false"
+  timeToIdleSeconds="10000"
+  timeToLiveSeconds="10000">
+  <persistence strategy="localTempSwap"/>
+</cache>
+<cache name="CachedPage2Cache"
+  maxEntriesLocalHeap="10"
+  eternal="false"
+  timeToLiveSeconds="3600">
+  <persistence strategy="localTempSwap"/>
+</cache>
+<cache name="SimplePageFragmentCachingFilter"
+  maxEntriesLocalHeap="10"
+  eternal="false"
+  timeToIdleSeconds="10000"
+  timeToLiveSeconds="10000">
+  <persistence strategy="localTempSwap"/>
+</cache>
+<cache name="SimpleCachingHeadersTimeoutPageCachingFilter"
+  maxEntriesLocalHeap="10"
+  eternal="false"
+  timeToIdleSeconds="10000"
+  timeToLiveSeconds="10000">
+  <persistence strategy="localTempSwap"/>
+</cache>
+</ehcache>
